@@ -1,5 +1,6 @@
 package com.ahuo.spring.controller;
 
+import com.ahuo.entity.AllUserResponse2;
 import com.ahuo.spring.dto.AllUserResponse;
 import com.ahuo.spring.entity.User;
 import com.ahuo.spring.service.UserService;
@@ -30,7 +31,7 @@ public class UserController {
         ResponseUtils.setResponse(response);
         List<User> users = this.userService.findAll();
         PrintWriter writer = response.getWriter();
-        AllUserResponse allUserResponse=new AllUserResponse();
+        AllUserResponse2 allUserResponse=new AllUserResponse2();
         allUserResponse.setUsers(users);
         allUserResponse.setCode(200);
         allUserResponse.setMsg("请求成功！");
