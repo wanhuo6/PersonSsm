@@ -49,6 +49,10 @@ dependencies {
     compile 'org.mybatis:mybatis-spring:1.2.3'
     compile 'org.mybatis:mybatis:3.3.0'
     compile 'com.github.wanhuo6:fire:1.0'
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
+    compile group: 'javax', name: 'javaee-api', version: '7.0'
+    //映入JSON
+    runtime("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
 
 
 
@@ -62,10 +66,10 @@ dependencies {
 task mybatisGenerate << {
     ant.properties['targetProject'] = projectDir.path
     ant.properties['jarDirection'] = project['jdbc.jarDirection']
-    ant.properties['driverClass'] = project['jdbc.driverClassName']
+    ant.properties['driverClass'] = project['jdbc.driver']
     ant.properties['connectionURL'] = project['jdbc.url']
-    ant.properties['userId'] = project['jdbc.user']
-    ant.properties['password'] = project['jdbc.pass']
+    ant.properties['userId'] = project['jdbc.username']
+    ant.properties['password'] = project['jdbc.password']
     ant.properties['src_main_java'] = sourceSets.main.java.srcDirs[0].path
     ant.properties['src_main_resources'] = sourceSets.main.resources.srcDirs[0].path
     ant.properties['modelPackage'] = project['modelPackage']

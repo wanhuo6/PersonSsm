@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ahuo.spring.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.ahuo.spring.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="height" jdbcType="DOUBLE" property="height" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="blog" jdbcType="VARCHAR" property="blog" />
+    <result column="headImage" jdbcType="VARCHAR" property="headimage" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+      and uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ahuo.spring.entity.User">
+    insert into user (id, uuid, name, 
+      age, photo, height, 
+      weight, blog, headImage, 
+      account, password, sex
+      )
+    values (#{id,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{photo,jdbcType=VARCHAR}, #{height,jdbcType=DOUBLE}, 
+      #{weight,jdbcType=DOUBLE}, #{blog,jdbcType=VARCHAR}, #{headimage,jdbcType=VARCHAR}, 
+      #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ahuo.spring.entity.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      photo = #{photo,jdbcType=VARCHAR},
+      height = #{height,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      blog = #{blog,jdbcType=VARCHAR},
+      headImage = #{headimage,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+      and uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select id, uuid, name, age, photo, height, weight, blog, headImage, account, password, 
+    sex
+    from user
+    where id = #{id,jdbcType=INTEGER}
+      and uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, uuid, name, age, photo, height, weight, blog, headImage, account, password, 
+    sex
+    from user
+  </select>
+
+</mapper>
