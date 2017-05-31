@@ -11,6 +11,7 @@
     <title>hiwdd</title>
   </head>
   <body>
-  hello_world
+  <img src="/static/img/hk.jpg">
+  hello_hk
   </body>
 </html>
