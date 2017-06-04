@@ -11,4 +11,8 @@ public interface UserService {
 
     List<User> findAll();
 
+    void insertUser(User user);
+
+    User findUserByAccount(String account);
+
 }

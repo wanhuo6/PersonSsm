@@ -54,6 +54,12 @@
     where id = #{id,jdbcType=INTEGER}
       and uuid = #{uuid,jdbcType=VARCHAR}
   </select>
+  <select id="selectByAccount" parameterType="map" resultMap="BaseResultMap">
+    select id, uuid, name, age, photo, height, weight, blog, headImage, account, password,
+    sex
+    from user
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, uuid, name, age, photo, height, weight, blog, headImage, account, password, 
     sex

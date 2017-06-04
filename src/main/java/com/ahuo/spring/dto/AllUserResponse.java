@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class AllUserResponse extends BaseResponse {
 
+    private List<User> users;
+
     public List<User> getUsers() {
         return users;
     }
@@ -17,9 +19,5 @@ public class AllUserResponse extends BaseResponse {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-
-    private List<User> users;
-
-
 
 }

@@ -22,4 +22,16 @@ public class UserServiceImp implements UserService {
     public List<User> findAll() {
         return userDao.selectAll();
     }
+
+    @Override
+    public void insertUser(User user) {
+        userDao.insert(user);
+    }
+
+    @Override
+    public User findUserByAccount(String account) {
+       return userDao.selectByAccount(account);
+    }
+
+
 }

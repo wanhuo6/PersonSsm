@@ -13,5 +13,5 @@ public interface UserMapper {
 
     List<User> selectAll();
 
-    int updateByPrimaryKey(User record);
+    User selectByAccount(@Param("account") String account);
 }
