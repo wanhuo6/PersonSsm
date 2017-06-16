@@ -1,16 +1,17 @@
 package com.ahuo.spring.controller;
 
+import com.ahuo.spring.config.AppConfig;
 import com.ahuo.spring.dto.AllUserResponse;
 import com.ahuo.spring.dto.GetUserResponse;
-import com.ahuo.spring.dto.SubmitResponse;
+import com.ahuo.spring.dto.RegisterResponse;
 import com.ahuo.spring.entity.User;
 import com.ahuo.spring.service.UserService;
+import com.ahuo.spring.util.CommonUtils;
 import com.ahuo.spring.util.JsonUtils;
 import com.ahuo.spring.util.ResponseUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -42,23 +43,33 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public void getUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ResponseUtils.setResponse(response);
         String account=request.getParameter("account");
+        String password=request.getParameter("password");
         String msgTip;
+        boolean isSuccess=false;
         GetUserResponse getUserResponse=new GetUserResponse();
-        if(account==null){
+        if(account==null||password==null){
              msgTip="输入为空";
+
         }else {
             User user = userService.findUserByAccount(account);
             if (user==null){
                 msgTip="账户不存在";
             }else{
-                msgTip="请求成功";
+                if (password.equals(user.getPassword())){
+                    msgTip="请求成功";
+                    isSuccess=true;
+                    getUserResponse.setUrl(AppConfig.API_HOST+"hello");
+                    getUserResponse.setUser(user);
+                }else{
+                    msgTip="密码错误";
+                }
             }
-            getUserResponse.setUser(user);
         }
+        getUserResponse.setSuccess(isSuccess);
         getUserResponse.setCode(200);
         getUserResponse.setMsg(msgTip);
         PrintWriter writer = response.getWriter();
@@ -67,23 +78,24 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public void register(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ResponseUtils.setResponse(response);
         String name =request.getParameter("name");
         String account=request.getParameter("account");
         String password=request.getParameter("password");
-        String verifyPsw=request.getParameter("verifyPassword");
-        String uuid=String.valueOf(System.currentTimeMillis());
+        //String verifyPsw=request.getParameter("verifyPassword");
+        String uuid= CommonUtils.getUUID();
         String msgTip;
         boolean isSubmit=false;
-        if (name==null||account==null||password==null||verifyPsw==null){
+        RegisterResponse registerResponse=new RegisterResponse();
+        if (name==null||account==null||password==null){
             msgTip="信息不完整";
         }else if (account.length()<6||password.length()<6){
             msgTip="账户或者密码至少六位";
-        }else if(!password.equals(verifyPsw)){
+        }/*else if(!password.equals(verifyPsw)){
             msgTip="两次密码不一致";
-        }else if(userService.findUserByAccount(account)!=null){
+        }*/else if(userService.findUserByAccount(account)!=null){
             msgTip="账户已经存在";
         }else{
             User user=new User();
@@ -94,16 +106,17 @@ public class UserController {
             userService.insertUser(user);
             isSubmit=true;
             msgTip="注册成功！";
+            registerResponse.setUrl(AppConfig.API_HOST+"hello");
         }
-        SubmitResponse submitResponse=new SubmitResponse();
-        submitResponse.setCode(200);
-        submitResponse.setSubmit(isSubmit);
-        submitResponse.setMsg(msgTip);
+
+        registerResponse.setCode(200);
+        registerResponse.setSuccess(isSubmit);
+        registerResponse.setMsg(msgTip);
         PrintWriter writer = response.getWriter();
-        writer.print(JsonUtils.toJson(submitResponse));
+        writer.print(JsonUtils.toJson(registerResponse));
         return ;
     }
-    @RequestMapping("/test")
+    @RequestMapping("/hello")
     public String test() {
         System.out.println("hello");
         return "index";

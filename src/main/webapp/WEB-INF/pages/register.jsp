@@ -17,11 +17,11 @@
 </head>
 <body>
 <h1>用户注册</h1>
-<form action="<%=basePath%>register" method="get">
+<form action="<%=basePath%>register" method="post">
     用户昵称：<input type="text" name="name"><br>
     用户账号：<input type="text" name="account"><br>
     用户密码：<input type="password" name="password"><br>
-    确认密码：<input type="password" name="verifyPassword"><br><br>
+   <br>
     <input type="submit" value="注册">
 </form>
 </body>

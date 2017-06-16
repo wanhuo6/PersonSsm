@@ -8,6 +8,16 @@ public class BaseResponse<T> {
 
     private String msg;
 
+    public boolean isSuccess() {
+        return isSuccess;
+    }
+
+    public void setSuccess(boolean success) {
+        isSuccess = success;
+    }
+
+    private boolean isSuccess;
+
     public T getData() {
         return data;
     }
