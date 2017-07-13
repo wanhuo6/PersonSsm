@@ -116,7 +116,7 @@ public class UserController {
         writer.print(JsonUtils.toJson(registerResponse));
         return ;
     }
-    @RequestMapping("/hello22")
+    @RequestMapping("/hello33")
     public String test() {
         System.out.println("hello");
         return "index";
