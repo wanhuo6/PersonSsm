@@ -17,6 +17,6 @@
   </head>
   <body>
   <img src="<%=basePath%>static/img/hk.jpg" width="100%">
-  hello_hk+<%=basePath%>
+  成功，的，等等史蒂芬孙，+<%=basePath%>
   </body>
 </html>
