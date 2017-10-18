@@ -6,6 +6,7 @@ import com.ahuo.spring.dto.GetUserResponse;
 import com.ahuo.spring.dto.RegisterResponse;
 import com.ahuo.spring.entity.User;
 import com.ahuo.spring.service.UserService;
+import com.ahuo.spring.test.MultiThreadServer;
 import com.ahuo.spring.util.CommonUtils;
 import com.ahuo.spring.util.JsonUtils;
 import com.ahuo.spring.util.ResponseUtils;
@@ -30,7 +31,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
-    public void getUsers(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void getUsers(HttpServletResponse response) throws IOException {
         ResponseUtils.setResponse(response);
         List<User> users = this.userService.findAll();
         PrintWriter writer = response.getWriter();
@@ -39,7 +40,6 @@ public class UserController {
         allUserResponse.setCode(200);
         allUserResponse.setMsg("请求成功！");
         writer.print(JsonUtils.toJson(allUserResponse));
-        return;
     }
 
     @ResponseBody
@@ -74,7 +74,6 @@ public class UserController {
         getUserResponse.setMsg(msgTip);
         PrintWriter writer = response.getWriter();
         writer.print(JsonUtils.toJson(getUserResponse));
-        return;
     }
 
     @ResponseBody
@@ -114,11 +113,16 @@ public class UserController {
         registerResponse.setMsg(msgTip);
         PrintWriter writer = response.getWriter();
         writer.print(JsonUtils.toJson(registerResponse));
-        return ;
     }
     @RequestMapping("/hello")
     public String test() {
         System.out.println("hello");
+        try {
+            new MultiThreadServer().service();
+        } catch (IOException e) {
+            System.out.println(e.getMessage()+"eee");
+            e.printStackTrace();
+        }
         return "index";
 
     }
