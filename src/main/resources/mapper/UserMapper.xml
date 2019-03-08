@@ -1,69 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ahuo.spring.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.ahuo.spring.entity.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="height" jdbcType="DOUBLE" property="height" />
-    <result column="weight" jdbcType="DOUBLE" property="weight" />
-    <result column="blog" jdbcType="VARCHAR" property="blog" />
-    <result column="headImage" jdbcType="VARCHAR" property="headimage" />
-    <result column="account" jdbcType="VARCHAR" property="account" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ahuo.spring.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.ahuo.spring.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="DOUBLE" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="blog" property="blog" jdbcType="VARCHAR" />
+    <result column="headimage" property="headimage" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from user
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user1
     where id = #{id,jdbcType=INTEGER}
-      and uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.ahuo.spring.entity.User">
-    insert into user (id, uuid, name, 
+  <insert id="insert" parameterType="com.ahuo.spring.entity.User" >
+    insert into user1 (id, uuid, name, 
       age, photo, height, 
-      weight, blog, headImage, 
-      account, password, sex
-      )
+      weight, blog, headimage, 
+      account, password)
     values (#{id,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER}, #{photo,jdbcType=VARCHAR}, #{height,jdbcType=DOUBLE}, 
       #{weight,jdbcType=DOUBLE}, #{blog,jdbcType=VARCHAR}, #{headimage,jdbcType=VARCHAR}, 
-      #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}
-      )
+      #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.ahuo.spring.entity.User">
-    update user
-    set name = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.ahuo.spring.entity.User" >
+    update user1
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       photo = #{photo,jdbcType=VARCHAR},
       height = #{height,jdbcType=DOUBLE},
       weight = #{weight,jdbcType=DOUBLE},
       blog = #{blog,jdbcType=VARCHAR},
-      headImage = #{headimage,jdbcType=VARCHAR},
+      headimage = #{headimage,jdbcType=VARCHAR},
       account = #{account,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER}
+      password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
-      and uuid = #{uuid,jdbcType=VARCHAR}
   </update>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
-    select id, uuid, name, age, photo, height, weight, blog, headImage, account, password, 
-    sex
-    from user
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, uuid, name, age, photo, height, weight, blog, headimage, account, password
+    from user1
     where id = #{id,jdbcType=INTEGER}
-      and uuid = #{uuid,jdbcType=VARCHAR}
   </select>
   <select id="selectByAccount" parameterType="map" resultMap="BaseResultMap">
     select id, uuid, name, age, photo, height, weight, blog, headImage, account, password,
     sex
-    from user
+    from user1
     where account = #{account,jdbcType=VARCHAR}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, uuid, name, age, photo, height, weight, blog, headImage, account, password, 
-    sex
-    from user
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, uuid, name, age, photo, height, weight, blog, headimage, account, password
+    from user1
   </select>
-
 </mapper>

@@ -16,12 +16,12 @@
     <result column="sex" jdbcType="INTEGER" property="sex" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from user
+    delete from users
     where id = #{id,jdbcType=INTEGER}
       and uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ahuo.spring.entity.User">
-    insert into user (id, uuid, name, 
+    insert into users (id, uuid, name,
       age, photo, height, 
       weight, blog, headImage, 
       account, password, sex
@@ -33,7 +33,7 @@
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.ahuo.spring.entity.User">
-    update user
+    update users
     set name = #{name,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       photo = #{photo,jdbcType=VARCHAR},
@@ -50,20 +50,20 @@
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     select id, uuid, name, age, photo, height, weight, blog, headImage, account, password, 
     sex
-    from user
+    from users
     where id = #{id,jdbcType=INTEGER}
       and uuid = #{uuid,jdbcType=VARCHAR}
   </select>
   <select id="selectByAccount" parameterType="map" resultMap="BaseResultMap">
     select id, uuid, name, age, photo, height, weight, blog, headImage, account, password,
     sex
-    from user
+    from users
     where account = #{account,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, uuid, name, age, photo, height, weight, blog, headImage, account, password, 
     sex
-    from user
+    from users
   </select>
 
 </mapper>

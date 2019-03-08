@@ -42,16 +42,12 @@
         </table> -->
 
         <!--  每一个数据库表都需要建立一个对应的table字段 &ndash;-->
-        <table schema="person" tableName="user" domainObjectName="User"
+        <table schema="test" tableName="user1" domainObjectName="User"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-          <!--  < <property name="useActualColumnNames" value="true"/>
-            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
-            <columnOverride column="DATE_FIELD" property="startDate" />
-            <ignoreColumn column="FRED" />
-            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> &ndash;&gt;-->
         </table>
+
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
        <!-- <table tableName="${tableName}" domainObjectName="${entityName}"
                enableCountByExample="false" enableUpdateByExample="false"

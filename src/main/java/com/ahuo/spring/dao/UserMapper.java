@@ -1,17 +1,20 @@
 package com.ahuo.spring.dao;
 
 import com.ahuo.spring.entity.User;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
-    int deleteByPrimaryKey(@Param("id") Integer id, @Param("uuid") String uuid);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
 
-    User selectByPrimaryKey(@Param("id") Integer id, @Param("uuid") String uuid);
+    User selectByPrimaryKey(Integer id);
 
     List<User> selectAll();
+
+    int updateByPrimaryKey(User record);
 
     User selectByAccount(@Param("account") String account);
 }
